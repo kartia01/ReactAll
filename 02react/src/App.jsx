@@ -1,37 +1,49 @@
-import React from 'react';
-import Button from './components/Button';
-import ViewComp from './components/ViewComp';
-import View01 from './components/View01';
+import React, { useState } from 'react';
+import Button from './components/state/Button';
+import './App.css';
 
 function App() {
-  const city = ['서울', '대전', '인천', '춘천'];
-  const city1 = ['춘천', '제주', '인천', '부산'];
-
+  const [isModal, setIsModal] = useState(false);
   return (
     <div>
-      App
-      {/* <Button></Button> = <Button /> */}
-      <Button title="글작성" color="red" />
-      <Button title="글보기" color="blue" />
-      <Button title="글수정" color="green" />
-      <Button title="글수정" color="black" />
-      <ViewComp cityData={city} />
-      <ViewComp cityData={city1}></ViewComp>
+        <h3>모달창만들기</h3>
+        {isModal ? (
+          <div className="vmodal">
+            <div className="title">
+              <h3>모달창</h3>
+              <div
+                onClick={() => {
+                  setIsModal(false);
+                }}
+              >
+                X
+              </div>
+            </div>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, necessitatibus.</p>
 
-      {city.map((item,i)=>{
-        return <View01 title={item}></View01>
-      })}
+            {/* 닫기버튼 */}
+            <div onClick={() => setIsModal(false)}>
+              <Button title="닫기" color="blue"></Button>
+            </div>
+          </div>
+        ) : null}
 
-      <Han />
+        <div
+          onClick={() => {
+            setIsModal(!isModal);
+          }}
+        >
+          <Button title="창띄우기"></Button>
+        </div>
+
+        {/* <div
+        onClick={() => {
+          setIsModal(false);
+        }}
+      >
+        <Button title="창닫기" color="red"></Button>
+      </div> */}
     </div>
-  );
-}
-
-function Han() {
-  return (
-    <>
-      <h2>han</h2>
-    </>
   );
 }
 
