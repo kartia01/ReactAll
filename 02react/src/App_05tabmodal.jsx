@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './tab.css';
-import ModalComp02 from './components/modal/ModalComp02';
 
 function App() {
   const data = [
@@ -25,40 +24,74 @@ function App() {
 
   const [Tmodal, setTmodal] = useState(false);
 
-  const modalViewFn = (index) => {
+  const modalViewFn = () => {
     setTmodal(true);
-    setTab(index);
-  };
+  }
 
   const modalClose = () => {
     setTmodal(false);
-  };
+  }
 
   // const tabList = () =>{
   //   setTab(tab+1);
   // }
 
-  // const tabNum = (index) => {
-  //   setTab(index);
-  // };
+  const tabNum = (index) => {
+    setTab(index);
+  };
 
   return (
     <div>
       Tab Menu ({tab})
+      <div>
         <ul className="tab">
           {data.map((item, i) => {
             return (
-              <li key={i} className={tab == i ? 'active' : ''} onClick={modalViewFn}>
+              <li
+                key={i}
+                className={tab == i ? 'active' : ''}
+                onClick={() => {
+                  tabNum(i);
+                }}
+              >
                 {item.btn}
               </li>
             );
           })}
-          {Tmodal ? <ModalComp02 tab= {tab} data={data} modalClose={modalClose} /> : null}
+          {/* <li
+          className = {`han ${tab == 0 ? 'active' : ''}`}
+            // className={tab == 0 ? 'active' : ''}
+            onClick={() => {
+              tabNum(0);
+            }}
+          >
+            tab1
+          </li>
+          <li
+            className={tab == 1 ? 'active' : ''}
+            onClick={() => {
+              tabNum(1);
+            }}
+          >
+            tab2
+          </li>
+          <li
+            className={tab == 2 ? 'active' : ''}
+            onClick={() => {
+              tabNum(2);
+            }}
+          >
+            tab3
+          </li> */}
         </ul>
-        {/* <div className="content">
+
+        {Tmodal ? <ModalComp02 data = {data} modalClose={modalClose} /> : null}
+        <div className="content">
           <h4>{data[tab].title}</h4>
           <p>{data[tab].content}</p>
-        </div>           */}
+        </div>          
+
+      </div>
     </div>
   );
 }
