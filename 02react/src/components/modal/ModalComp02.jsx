@@ -1,24 +1,15 @@
 import React from 'react';
 
-function ModalComp02({ tab, data, modalClose }) {
-  const style = {
-    wrap: {
-      width: '400px',
-      height: '400px',
-      background: 'lightgreen',
-    },
-    top: {
-      display: flex,
-      justifyContent: 'space-Between',
-    },
-  };
+function ModalComp02({ num, data, modalClose }) {
   return (
-    <div style={style.wrap}>
-      <div style={style.top}>
-        <h4>{data[tab].title}</h4>
-        <div onClick={modalClose}>X</div>
+    <div>
+      <div>
+        <h3>{data[num].title}</h3>
+        <div>
+          {data[num].name} / {data[num].date}
+        </div>
       </div>
-      <p>{data[tab].content}</p>
+      <p>{data[num].content}</p>
       <button onClick={modalClose}>닫기</button>
     </div>
   );

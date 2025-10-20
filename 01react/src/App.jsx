@@ -23,6 +23,7 @@ function App() {
         {islogin ? <p>로그인완료</p> : <p>로그인하세요</p>}
         {/* {city.map(function(){})}
         {city.map(()=>{})} */}
+        {/* map : 리스트를 화면에 그릴 때 사용하는 함수 */}
         {city.map((item, index) => {
           return <div key={index}>{item}</div>;
         })}

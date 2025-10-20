@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from './components/Button';
-import ViewComp from './components/ViewComp';
-import View01 from './components/View01';
-import MyComp from './components/MyComp';
+import Button from './components/props/Button';
+import ViewComp from './components/props/ViewComp';
+import View01 from './components/props/View01';
+import MyComp from './components/props/MyComp';
 
 function App() {
   const city = ['서울', '대전', '인천', '춘천'];
