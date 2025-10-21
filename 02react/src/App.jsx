@@ -1,76 +1,73 @@
-import React, { useState } from 'react';
-import './tab.css';
-import ModalComp02 from './components/modal/ModalComp02';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Modalcomp03 from './components/modal/Modalcomp03';
 
 function App() {
-  const data = [
-    {
-      btn: 'tab1',
-      title: '안녕하세요1',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, cumque?',
-    },
-    {
-      btn: 'tab2',
-      title: '안녕하세요2',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,',
-    },
-    {
-      btn: 'tab3',
-      title: '안녕하세요3',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    },
-  ];
+  // api data 가지고 오기
+  // npm install axios -> npm i axios
+  // useEffect axios.get('') 사용 async..await
+  // api 경로 'https://jsonplaceholder.typicode.com/posts'
 
-  const [tab, setTab] = useState(0);
+  const [postData, setPostData] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [num, setNum] = useState(0);
 
-  const [Tmodal, setTmodal] = useState(false);
-
-  const modalViewFn = (index) => {
-    setTmodal(true);
-    setTab(index);
+  const clickFn = (index) => {
+    setNum(index);
+    setModal(true);
   };
 
   const modalClose = () => {
-    setTmodal(false);
+    setModal(false);
   };
 
-  // const tabList = () =>{
-  //   setTab(tab+1);
-  // }
+  useEffect(() => {
+    // async function fetchApi() {
+    //   const res = await fetch()
+    // }
 
-  // const tabNum = (index) => {
-  //   setTab(index);
-  // };
+    // const fetch = async function(){
+    //   const rest = await fetch()
+    // }
+
+    const fetchApi = async () => {
+      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      console.log(res.data);
+      setPostData(res.data);
+    };
+
+    fetchApi();
+  }, []);
 
   return (
     <div>
-      Tab Menu ({tab})
-        <ul className="tab">
-          {data.map((item, i) => {
-            return (
-              <li key={i} className={tab == i ? 'active' : ''} onClick={modalViewFn}>
-                {item.btn}
-              </li>
-            );
-          })}
-          {Tmodal ? <ModalComp02 tab= {tab} data={data} modalClose={modalClose} /> : null}
-        </ul>
-        {/* <div className="content">
-          <h4>{data[tab].title}</h4>
-          <p>{data[tab].content}</p>
-        </div>           */}
+      <h3>List</h3>
+      {postData &&
+        postData.map((item, i) => {
+          return (
+            <div
+              onClick={() => {
+                clickFn(i);
+              }}
+            >
+              {item.userId}
+            </div>
+          );
+        })}
+      {modal ? <Modalcomp03 num={num} modalClose={modalClose} /> : null}
     </div>
+    // <div>
+    //   App
+    //     {postData &&
+    //       postData.map((item, i) => {
+    //         return (
+    //           <div>
+    //             {item.id}. {item.title}
+    //           </div>
+    //         );
+    //       })}
+    //   </div>
   );
 }
 
 export default App;
-// 1. map 사용(O)
-// 2. 모달창 사용
-// ※ 1.data 정보 파악
-//    2. 게시판리스트(array.map())
-//    3. click event
-//    4. useState를 작성
-//    5. modal디자인(컴포넌트생성)
-//    6. useState(false) 작성
-//    7. props에 대한 설계 (props, event)
-//    8. 오류해결
