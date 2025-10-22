@@ -1,0 +1,73 @@
+import React from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
+import ModalComp from './components/data/ModalComp';
+
+function App() {
+  // 프로젝트생성 npm create vite@latest projectname -> npm i -> code .
+  // npm run dev
+  // npm i axios / axios.get() https://jsonplaceholder.typicode.com/posts
+  // useEffect hook 사용 -> json data get -> console.log(res.data)
+  // useState사용하여 state관리, json data -> state에 저장
+  // 저장 state 화면에 출력, 배열.map(()=>{})
+  // 리스트출력완료 후 modal component 제작
+  // modal open 을 위한 state생성
+  // postItem state생성
+  // modal comp에 props 속성 value 전달
+  // modal comp 자료출력
+  // modal open/close 을 위한 함수 제작
+  // 오류수정
+  const [postData, setPostData] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [postItem, setPostItem] = useState(null);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        setPostData(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchApi();
+  }, []);
+
+  function postHandler(item) {
+    setPostItem(item);
+    setModal(true);
+  }
+
+  function modalClose() {
+    setPostItem(null);
+    setModal(false);
+  }
+
+  return (
+    <div>
+      <h3>List</h3>
+      {modal ? <ModalComp postItem={postItem} modalClose={modalClose} /> : null}
+
+      <ul>
+        {postData.length > 0
+          ? postData.map((item, i) => {
+              return (
+                <li
+                  key={i}
+                  onClick={() => {
+                    postHandler(item);
+                  }}
+                >
+                  {item.id}. {item.title}
+                </li>
+              );
+            })
+          : !postData && <p>데이터가 없습니다.</p>}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
