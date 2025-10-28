@@ -12,8 +12,8 @@ function BoardComp() {
 
   return (
     <div>
-      BoardComp <br /> 
-      params : {id} / {name1} / {age1} <br /> 
+      BoardComp <br />
+      params : {id} / {name1} / {age1} <br />
       searchParams : {name} / {age}
     </div>
   );

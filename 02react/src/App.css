@@ -1,37 +1,18 @@
-html,
-body {
-  height: 100%;
-}
-
-#root{
-  height:100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.vmodal {
-  background: cyan;
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -250px;
-  margin-top: -250px;
-  border-radius: 10px;
-  /* transform: translate(-50%,-50%); */
-  padding: 20px;
-}
-
-.vmodal .title {
-  display: flex;
-  justify-content: space-between;
-}
-
-#btn{
-  display:flex;
-  justify-content: center;
-}
-
 /* 버튼 가운데로 맞추기 */
+
+ul,
+li {
+  list-style: none;
+  padding:0;
+  margin:0;
+}
+
+.menu li a.active{
+  background:pink;
+  font-weight:bold;
+  color:blue;
+}
+
+.submenu a.active{
+  font-weight: bold;
+}
