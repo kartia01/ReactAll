@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Link, Links, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom';
 import './app.css';
 import HomeComp from './components/pages/HomeComp';
 import AboutComp from './components/pages/about/AboutComp';
