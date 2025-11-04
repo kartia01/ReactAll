@@ -1,25 +1,23 @@
-import React, { createContext } from 'react';
-import ParentComp from './components/context/ParentComp';
-// import { UserProvider } from './context/UserContext';
+import { createContext, useContext, useState } from 'react';
 
-// const UserContext = createContext();
+const Postcontext = createContext();
 
-// function App() {
-//   return (
-//     <UserContext.Provider value="홍길동">
-//       <ParentComp />
-//     </UserContext.Provider>
-//   );
-// }
+export const usePost = () => {
+  const context = useContext(Postcontext);
+  if (!context) {
+    throw new Error('Postprovider 안에 적용해야 함');
+  }
+  return context;
+};
 
-import { UserProvider } from './context/UserContext';
+export const PostProvider = ({ children }) => {
+  const [view, setView] = useState('안녕하세요');
 
-function App() {
-  return (
-    <UserProvider>
-      <ParentComp />
-    </UserProvider>
-  );
-}
+  const viewHandler = () => {
+    alert('hi');
+  };
 
-export default App;
+  
+
+  return <Postcontext.Provider value={value}>{children}</Postcontext.Provider>;
+};
