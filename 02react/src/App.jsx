@@ -4,12 +4,16 @@ function App() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('이미지 파일업로드');
   const [text, setText] = useState('');
+  const [preview, setPreview] = useState('');
 
   const fileChangeHandler = (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     const imagefile = e.target.files[0];
+    console.log(URL.createObjectURL(imagefile));
+
     setFileName(imagefile.name);
     setFile(imagefile);
+    setPreview(URL.createObjectURL(imagefile));
   };
 
   const submitHandler = (e) => {
@@ -21,8 +25,8 @@ function App() {
     console.log(formData);
     // alert('전송');
 
-    for (const [key, value] of formData.entries()){
-        console.log(key, value);
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value);
     }
   };
 
@@ -46,6 +50,7 @@ function App() {
           />
         </div>
         <button type="submit">전송</button>
+        {preview && <img src={preview} width={200} />}
       </form>
     </div>
   );
