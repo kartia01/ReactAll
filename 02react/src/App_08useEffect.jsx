@@ -16,6 +16,7 @@ function App() {
     async function fetchData() {
       console.log('데이터가 들어옴');
       const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+      // fetch : 네트워크 요청을 보내고 응답을 받아오는 역할
       const data = await res.json();
       console.log(data);
       setMydata(data);
